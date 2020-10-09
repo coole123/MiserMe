@@ -46,3 +46,8 @@ def register():
             hashing = generate_password_hash(request.form.get("password"))
             try:
                 primary_key = c.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, hashing))
+            except:
+                return render_template("error_user_exists.html")
+            
+            session["user_id"] = primary_key
+            return redirect("/")
