@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, request, session
 from flask_session import Session 
 from helpers import login_required
+from werkzeug.security import check_password_hash, generate_password_hash
 
 app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = False
@@ -32,4 +33,5 @@ def register():
     if request.method == "GET":
         return render_template("register.html")
     else:
-        return render_template("register.html")
+        if request.form.get("username") == "":
+            return "Incorrect Username"
