@@ -25,3 +25,11 @@ def login():
         return render_template("login.html")
     else:
         return render_template("index.html")
+
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    """ Register a New User """
+    if request.method == "GET":
+        return render_template("register.html")
+    else:
+        return render_template("register.html")
