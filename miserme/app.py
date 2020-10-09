@@ -45,4 +45,4 @@ def register():
             username = request.form.get("username")
             hashing = generate_password_hash(request.form.get("password"))
             try:
-                primary_key = 
+                primary_key = c.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, hashing))
