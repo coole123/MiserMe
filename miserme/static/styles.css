@@ -6,3 +6,7 @@ main {
     overflow-x: auto;
     text-align: center;
 }
+
+nav .navbar-brand .miserme_brand {
+    color: green;
+}
