@@ -59,8 +59,7 @@ def register():
             except:
                 return render_template("error_user_exists.html")
             
-            # session["user_id"] = primary_key
-            return redirect("/")
+            return render_template("/register_success.html")
 
 @app.route("/")
 @login_required
