@@ -52,12 +52,14 @@ def register():
         else:
             username = request.form.get("username")
             hashing = generate_password_hash(request.form.get("password"))
+            default = 0
             try:
-                primary_key = c.execute("INSERT INTO users (username, password, funds) VALUES (?, ?, ?)", (username, hashing,))
+                c.execute("INSERT INTO registrants (username, password, funds) VALUES (?, ?, ?)", (username, hashing, default))
+                conn.commit()
             except:
                 return render_template("error_user_exists.html")
             
-            session["user_id"] = primary_key
+            # session["user_id"] = primary_key
             return redirect("/")
 
 @app.route("/")
