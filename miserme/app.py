@@ -31,11 +31,11 @@ def login():
         results = c.fetchall()
 
         # check that the user exists in the database and the password matches
-        if len(results) != 1 or not check_password_hash(results[0]["password"], request.form.get("password")):
+        if len(results) != 1 or not check_password_hash(results[0][2], request.form.get("password")):
             return render_template("errorpage.html")
         
         # recognize the user based on id
-        session["user_id"] = results[0]["id"]
+        session["user_id"] = results[0][0]
         return redirect("/")
         
 
