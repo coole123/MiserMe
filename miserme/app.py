@@ -66,3 +66,13 @@ def register():
 def index():
     """ Show the available monthly funds, fixed expenses, and total left """
     return render_template("index.html")
+
+@app.route("/logout")
+def logout():
+    """ Log the current user out of the app """
+
+    # clear all sessions of the user
+    session.clear()
+
+    # Redirect user to homepage / login page
+    return redirect("/")
