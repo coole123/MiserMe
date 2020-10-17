@@ -67,6 +67,20 @@ def index():
     """ Show the available monthly funds, fixed expenses, and total left """
     c.execute("SELECT txn_name, date, predicted_cost, true_cost, funds_added, notes FROM finances WHERE user_id = :user_id", {"user_id": session["user_id"]})
     rows = c.fetchall()
+
+    funds_snapshot = []
+    budget = 0
+
+    for row in rows:
+        funds_snapshot.append({
+            "name": row[2],
+            "date": row[3],
+            "predict": row[4],
+            "true": row[5],
+            "added": row[6],
+            "notes": row[7]
+        })
+
     return render_template("index.html")
 
 @app.route("/logout")
