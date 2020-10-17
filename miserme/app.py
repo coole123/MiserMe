@@ -86,7 +86,7 @@ def index():
     current_funds = rows[0][0]
     budget += current_funds
     
-    return render_template("index.html")
+    return render_template("index.html", funds_snapshot=funds_snapshot, current_funds=current_funds, budget=budget)
 
 @app.route("/logout")
 def logout():
