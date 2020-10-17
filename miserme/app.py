@@ -80,7 +80,12 @@ def index():
             "added": row[6],
             "notes": row[7]
         })
-
+    
+    c.execute("SELECT funds FROM registrants WHERE id = :user_id", {"user_id": session["user_id"]})
+    rows = c.fetchall()
+    current_funds = rows[0][0]
+    budget += current_funds
+    
     return render_template("index.html")
 
 @app.route("/logout")
