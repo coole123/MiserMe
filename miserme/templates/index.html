@@ -6,6 +6,33 @@
 
 {% block main %}
 <div class="col-12">
-    <h1>Welcome to MiserMe!</h1>
+    <table class="table table-striped">
+        <!-- Table Headers -->
+        <thead>
+            <tr>
+                <th>Transaction Name</th>
+                <th>Date</th>
+                <th>Predicted Cost</th>
+                <th>True Cost</th>
+                <th>Funds Added</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <!-- Table Data -->
+            {% for i in funds_snapshot %}
+            <tr>
+                <td>{{ i[0] }}</td>
+                <td>{{ i[1] }}</td>
+                <td>{{ i[2] }}</td>
+                <td>{{ i[3] }}</td>
+                <td>{{ i[4] }}</td>
+                <td>{{ i[5] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
 </div>
 {% endblock %}
