@@ -65,6 +65,8 @@ def register():
 @login_required
 def index():
     """ Show the available monthly funds, fixed expenses, and total left """
+    c.execute("SELECT txn_name, date, predicted_cost, true_cost, funds_added, notes FROM finances WHERE user_id = :user_id", {"user_id": session["user_id"]})
+    rows = c.fetchall()
     return render_template("index.html")
 
 @app.route("/logout")
