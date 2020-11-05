@@ -88,6 +88,15 @@ def index():
     
     return render_template("index.html", funds_snapshot=funds_snapshot, current_funds=current_funds, budget=budget)
 
+@app.route("/expense", methods=["GET", "POST"])
+@login_required
+def expense():
+    """ Allow the user to log in an expense by filling out a short form that speaks to the finances database """
+    if request.method == "GET":
+        return render_template("expense.html")
+    else:
+        return render_template("index.html")
+
 @app.route("/logout")
 def logout():
     """ Log the current user out of the app """
