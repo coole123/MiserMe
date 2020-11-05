@@ -88,6 +88,15 @@ def index():
     
     return render_template("index.html", funds_snapshot=funds_snapshot, current_funds=current_funds, budget=budget)
 
+@app.route("/add_funds", methods=["GET", "POST"])
+@login_required
+def add_funds():
+    """ Allow the user to add more funds to their wallet. Useful in cases where user get unexpected income. """
+    if request.method == "GET":
+        return render_template("add_funds.html")
+    else:
+        return render_template("index.html")
+
 @app.route("/expense", methods=["GET", "POST"])
 @login_required
 def expense():
@@ -96,6 +105,12 @@ def expense():
         return render_template("expense.html")
     else:
         return render_template("index.html")
+
+@app.route("/history")
+@login_required
+def history():
+    """ Allows the user to view past transactions made. Including adding funds and expenses. """
+    return render_template("history.html")
 
 @app.route("/logout")
 def logout():
