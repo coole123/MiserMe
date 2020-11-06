@@ -110,6 +110,11 @@ def expense():
         txn_t_cost = request.form.get("txn_t_cost")
         txn_notes = request.form.get("txn_notes")
 
+        c.execute("INSERT INTO finances (user_id, txn_name, date, predicted_cost, true_cost, notes) VALUES (?, ?, ?, ?, ?, ?",
+                (session["user_id"], txn_name, txn_date, txn_p_cost, txn_t_cost, txn_notes))
+            
+        return redirect("/")
+
 @app.route("/history")
 @login_required
 def history():
