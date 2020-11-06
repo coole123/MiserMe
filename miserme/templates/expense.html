@@ -5,7 +5,12 @@
 {% endblock %}
 
 {% block main %}
-<div class="col-12">
-    <p1>Here is where I will put the expense logging form.</p1>
-</div>
+    <form action="/expense" method="POST">
+
+        <!-- First we need an input of the expense name -->
+        <div class="form-group">
+            <input class="form-control" name="expensename" type="text" placeholder="Expense Name" autofocus>
+        </div>
+        
+    </form>
 {% endblock %}
