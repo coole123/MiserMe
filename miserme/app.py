@@ -67,7 +67,6 @@ def index():
     """ Show the available monthly funds, fixed expenses, and total left """
     c.execute("SELECT txn_name, date, predicted_cost, true_cost, funds_added, notes FROM finances WHERE user_id = :user_id", {"user_id": session["user_id"]})
     rows = c.fetchall()
-    print(rows)
 
     funds_snapshot = []
     budget = 0
@@ -112,6 +111,7 @@ def expense():
 
         c.execute("INSERT INTO finances (user_id, txn_name, date, predicted_cost, notes) VALUES (?, ?, ?, ?, ?)",
                 (session["user_id"], txn_name, txn_date, txn_p_cost, txn_notes))
+        conn.commit()
             
         return redirect("/")
 

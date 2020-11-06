@@ -23,12 +23,12 @@
             <!-- Table Data -->
             {% for i in funds_snapshot %}
             <tr>
-                <td>{{ i[0] }}</td>
-                <td>{{ i[1] }}</td>
-                <td>{{ i[2] }}</td>
-                <td>{{ i[3] }}</td>
-                <td>{{ i[4] }}</td>
-                <td>{{ i[5] }}</td>
+                <td>{{ i["name"] }}</td>
+                <td>{{ i["date"] }}</td>
+                <td>{{ i["predict"] }}</td>
+                <td>{{ i["true"] }}</td>
+                <td>{{ i["added"] }}</td>
+                <td>{{ i["notes"] }}</td>
             </tr>
             {% endfor %}
         </tbody>
