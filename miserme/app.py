@@ -67,18 +67,19 @@ def index():
     """ Show the available monthly funds, fixed expenses, and total left """
     c.execute("SELECT txn_name, date, predicted_cost, true_cost, funds_added, notes FROM finances WHERE user_id = :user_id", {"user_id": session["user_id"]})
     rows = c.fetchall()
+    print(rows)
 
     funds_snapshot = []
     budget = 0
 
     for row in rows:
         funds_snapshot.append({
-            "name": row[2],
-            "date": row[3],
-            "predict": row[4],
-            "true": row[5],
-            "added": row[6],
-            "notes": row[7]
+            "name": row[0],
+            "date": row[1],
+            "predict": row[2],
+            "true": row[3],
+            "added": row[4],
+            "notes": row[5]
         })
     
     c.execute("SELECT funds FROM registrants WHERE id = :user_id", {"user_id": session["user_id"]})
@@ -107,11 +108,10 @@ def expense():
         txn_name = request.form.get("txn_name")
         txn_date = request.form.get("txn_date")
         txn_p_cost = request.form.get("txn_p_cost")
-        txn_t_cost = request.form.get("txn_t_cost")
         txn_notes = request.form.get("txn_notes")
 
-        c.execute("INSERT INTO finances (user_id, txn_name, date, predicted_cost, true_cost, notes) VALUES (?, ?, ?, ?, ?, ?",
-                (session["user_id"], txn_name, txn_date, txn_p_cost, txn_t_cost, txn_notes))
+        c.execute("INSERT INTO finances (user_id, txn_name, date, predicted_cost, notes) VALUES (?, ?, ?, ?, ?)",
+                (session["user_id"], txn_name, txn_date, txn_p_cost, txn_notes))
             
         return redirect("/")
 
