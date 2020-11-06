@@ -9,8 +9,17 @@
 
         <!-- First we need an input of the expense name -->
         <div class="form-group">
-            <input class="form-control" name="expensename" type="text" placeholder="Expense Name" autofocus>
+            <input class="form-control" name="txn_name" type="text" placeholder="Expense Name" autofocus>
         </div>
-        
+
+        <!-- User will input the date they expect the expense to debit -->
+        <div class="form-group">
+            <input class="form-control" name="date" type="text" placeholder="Date">
+        </div>
+
+        <!-- User will input what they believe the expense will cost -->
+        <div class="form-group">
+            <input class="form-control" name="predicted_cost" type="text" placeholder="Cost">
+        </div>
     </form>
 {% endblock %}
