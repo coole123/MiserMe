@@ -14,23 +14,23 @@
 
         <!-- User will input the date they expect the expense to debit -->
         <div class="form-group">
-            <input class="form-control" name="date" type="text" placeholder="Date">
+            <input class="form-control" name="txn_date" type="text" placeholder="Date">
         </div>
 
         <!-- User will input what they believe the expense will cost -->
         <div class="form-group">
-            <input class="form-control" name="predicted_cost" type="text" placeholder="Cost">
+            <input class="form-control" name="txn_p_cost" type="text" placeholder="Cost">
         </div>
 
         <!-- User will input the true cost of an expense -->
         <div class="form-group">
-            <input class="form-control" name="true_cost" type="text" placeholder="Cost (After Payment)">
+            <input class="form-control" name="txn_t_cost" type="text" placeholder="Cost (After Payment)">
         </div>
 
         <!-- User will input any notes associated with the expense -->
         <div class="form-group">
-            <input class="form-control" name="notes" type="text" placeholder="Notes">
+            <input class="form-control" name="txn_notes" type="text" placeholder="Notes">
         </div>
-        
+
     </form>
 {% endblock %}

@@ -104,7 +104,11 @@ def expense():
     if request.method == "GET":
         return render_template("expense.html")
     else:
-        return render_template("index.html")
+        txn_name = request.form.get("txn_name")
+        txn_date = request.form.get("txn_date")
+        txn_p_cost = request.form.get("txn_p_cost")
+        txn_t_cost = request.form.get("txn_t_cost")
+        txn_notes = request.form.get("txn_notes")
 
 @app.route("/history")
 @login_required
