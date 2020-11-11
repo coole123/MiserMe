@@ -8,10 +8,24 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>
-                    
-                </th>
+                <th>Transaction Name</th>
+                <th>Predicted Cost</th>
+                <th>True Cost</th>
+                <th>Funds Added</th>
+                <th>Notes</th>
             </tr>
         </thead>
+
+        <tbody>
+            {% for i in entries %}
+            <tr>
+                <td>{{ i["txn_name"] }}</td>
+                <td>{{ i["predicted_cost"] }}</td>
+                <td>{{ i["true_cost"] }}</td>
+                <td>{{ i["funds_added"] }}</td>
+                <td>{{ i["notes"] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
 {% endblock %}
