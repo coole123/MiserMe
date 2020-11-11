@@ -125,7 +125,12 @@ def expense():
 @login_required
 def history():
     """ Allows the user to view past transactions made. Including adding funds and expenses. """
-    return render_template("history.html")
+    
+    entries = c.execute(""" 
+    SELECT txn_name, predicted_cost, true_cost, funds_added, notes WHERE user_id = :user_id;
+     """, {"user_id": session["user_id"]})
+
+    return render_template("history.html", entries = entries)
 
 @app.route("/logout")
 def logout():
