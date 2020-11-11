@@ -118,6 +118,11 @@ def expense():
         c.execute("INSERT INTO finances (user_id, txn_name, date, predicted_cost, notes) VALUES (?, ?, ?, ?, ?)",
                 (session["user_id"], txn_name, txn_date, txn_p_cost, txn_notes))
         conn.commit()
+
+        c.execute("""
+        INSERT INTO history (user_id, txn_name, date, predicted_cost, notes) VALUES (?, ? , ?, ?, ?)
+        """, (session["user_id"], txn_name, txn_date, txn_p_cost, txn_notes))
+        conn.commit()
             
         return redirect("/")
 
