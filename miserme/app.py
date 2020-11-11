@@ -95,7 +95,9 @@ def add_funds():
     if request.method == "GET":
         return render_template("add_funds.html")
     else:
-        return render_template("add_funds.html")
+        added_funds = request.form.get("add_funds")
+        c.execute("UPDATE registrants SET funds = funds + :added_funds WHERE id = :user_id", {"added_funds": added_funds, "user_id": session["user_id"]})
+        return redirect("/")
 
 @app.route("/expense", methods=["GET", "POST"])
 @login_required
