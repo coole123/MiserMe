@@ -15,3 +15,4 @@ CS50 Final Project - Take control of your finances.
 | November 4th, 2020 | Created the HTML files for Funds, Expenses, and History. Coded the functions in app.py to load the HTML files |
 | November 5th, 2020 | Completed expense.html file for user expense log; programmed the expense function, debugging to continue |
 | November 6th, 2020 | Completed expense function and properly connected it to index.html. Funds snapshot now displays |
+| November 10th, 2020 | Completed the add_funds function and the add_funds.html file. Adding to available funds now an option |
