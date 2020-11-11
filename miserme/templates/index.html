@@ -33,6 +33,15 @@
             {% endfor %}
         </tbody>
 
+        <tfoot>
+            <!-- Display the current available funds -->
+            <tr>
+                <td colspan="4"></td>
+                <td style="font-weight:bold;">Available: {{ current_funds }}</td>
+            </tr>
+            
+        </tfoot>
+
     </table>
 </div>
 {% endblock %}
