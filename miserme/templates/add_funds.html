@@ -5,7 +5,11 @@
 {% endblock %}
 
 {% block main %}
-<div class="col-12">
-    <p1>Here is where I will put the form to add funds to the user's wallet.</p1>
-</div>
+    <form action="/add_funds" method="POST">
+        <div class="form-group">
+            <input autofocus type="number" name="add_funds" placeholder="How much to add?" min=1 class="form-control">
+        </div>
+
+        <button class="btn btn-primary">Add Funds</button>
+    </form>
 {% endblock %}

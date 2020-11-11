@@ -95,7 +95,7 @@ def add_funds():
     if request.method == "GET":
         return render_template("add_funds.html")
     else:
-        return render_template("index.html")
+        return render_template("add_funds.html")
 
 @app.route("/expense", methods=["GET", "POST"])
 @login_required
