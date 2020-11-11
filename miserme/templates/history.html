@@ -19,9 +19,9 @@
         <tbody>
             {% for i in entries %}
             <tr>
-                <td>{{ i["txn_name"] }}</td>
-                <td>{{ i["predicted_cost"] }}</td>
-                <td>{{ i["true_cost"] }}</td>
+                <td>{{ i["name"] }}</td>
+                <td>{{ i["predict"] }}</td>
+                <td>{{ i["true"] }}</td>
                 <td>{{ i["funds_added"] }}</td>
                 <td>{{ i["notes"] }}</td>
             </tr>
