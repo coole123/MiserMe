@@ -97,6 +97,10 @@ def add_funds():
     else:
         added_funds = request.form.get("add_funds")
         c.execute("UPDATE registrants SET funds = funds + :added_funds WHERE id = :user_id", {"added_funds": added_funds, "user_id": session["user_id"]})
+        c.execute(""" 
+        INSERT INTO history (user_id, txn_name, funds_added, notes) VALUES (?, ?, ?, ?)
+        """, (session["user_id"], "Added Funds", added_funds, "New Entry: increased avaiable funds."))
+        conn.commit()
         return redirect("/")
 
 @app.route("/expense", methods=["GET", "POST"])
