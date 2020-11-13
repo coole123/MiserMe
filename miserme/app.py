@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, request, session
 from flask_session import Session 
 import sqlite3
-from helpers import login_required
+from helpers import login_required, usd
 from werkzeug.security import check_password_hash, generate_password_hash
 
 app = Flask(__name__)

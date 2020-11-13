@@ -10,3 +10,7 @@ def login_required(f):
             return redirect("/login")
         return f(*args, **kwargs)
     return decorated_functions
+
+def usd(value):
+    """ Format currency in app in USD """
+    return f"${value:,.2f}"
