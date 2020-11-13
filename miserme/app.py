@@ -75,9 +75,9 @@ def index():
         funds_snapshot.append({
             "name": row[0],
             "date": row[1],
-            "predict": row[2],
-            "true": row[3],
-            "added": row[4],
+            "predict": usd(row[2]),
+            "true": usd(row[3]),
+            "added": usd(row[4]),
             "notes": row[5]
         })
     

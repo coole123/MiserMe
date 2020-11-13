@@ -13,4 +13,5 @@ def login_required(f):
 
 def usd(value):
     """ Format currency in app in USD """
-    return f"${value:,.2f}"
+    if value != "---":
+        return f"${value:,.2f}"
