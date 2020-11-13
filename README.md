@@ -16,4 +16,5 @@ CS50 Final Project - Take control of your finances.
 | November 5th, 2020 | Completed expense.html file for user expense log; programmed the expense function, debugging to continue. |
 | November 6th, 2020 | Completed expense function and properly connected it to index.html. Funds snapshot now displays. |
 | November 10th, 2020 | Completed the add_funds function and the add_funds.html file. Adding to available funds now an option. |
-| November 11th, 2020 | Completed the history function and the history.html file. Included SQL queries for history in other functions.
+| November 11th, 2020 | Completed the history function and the history.html file. Included SQL queries for history in other functions. |
+| November 12th, 2020 | Debugged several issues that were causing values to show incorrectly (i.e. changed values to USD $, removed NONE values). |
