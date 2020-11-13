@@ -13,5 +13,7 @@ def login_required(f):
 
 def usd(value):
     """ Format currency in app in USD """
-    if value != "---":
+    if isinstance(value, float):
         return f"${value:,.2f}"
+    else:
+        return value
