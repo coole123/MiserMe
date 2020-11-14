@@ -1,5 +1,5 @@
 # MiserMe
-CS50 Final Project - Take control of your finances.
+A simple, free form budgeting / financial application.
 
 ### Updates
 
