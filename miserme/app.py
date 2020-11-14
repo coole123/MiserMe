@@ -94,11 +94,16 @@ def add_funds():
         return render_template("add_funds.html")
     else:
         added_funds = request.form.get("add_funds")
-        history_query = "Added %s to available funds." % added_funds
+
         c.execute("UPDATE registrants SET funds = funds + :added_funds WHERE id = :user_id", {"added_funds": added_funds, "user_id": session["user_id"]})
-        c.execute(""" 
-        INSERT INTO history (user_id, notes) VALUES (?, ?)
-        """, (session["user_id"], history_query))
+
+        c.execute("SELECT funds FROM registrants WHERE id = :user_id", {"user_id": session["user_id"]})
+        rows = c.fetchall()
+        new_funds = usd(rows[0][0])
+
+        history_query = "Added %s to available funds. New total = %s" % (added_funds, new_funds)
+
+        c.execute("INSERT INTO history (user_id, notes) VALUES (?, ?)", (session["user_id"], history_query))
         conn.commit()
         return redirect("/")
 
