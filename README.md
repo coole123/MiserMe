@@ -19,3 +19,4 @@ CS50 Final Project - Take control of your finances.
 | November 11th, 2020 | Completed the history function and the history.html file. Included SQL queries for history in other functions. |
 | November 12th, 2020 | Debugged several issues that were causing values to show incorrectly (i.e. changed values to USD $, removed NONE values). |
 | November 13th, 2020 | Debugged issues regarding empty values, included true costs in expense function, and included timestamp in history. |
+| November 14th, 2020 | Restructured history function: shows detailed description as opposed to a table of entries. Altered all functions to match changes. |
