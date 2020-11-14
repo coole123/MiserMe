@@ -148,6 +148,17 @@ def history():
 
     return render_template("history.html", entries = entries)
 
+# @app.route("/delete", methods=["GET", "POST"])
+# @login_required
+# def alter():
+#     """ Allow the user to change a field in the table """
+
+#     c.execute(""" 
+#         DELETE FROM finances
+#         WHERE 
+#     """)
+
+
 @app.route("/logout")
 def logout():
     """ Log the current user out of the app """
