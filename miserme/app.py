@@ -147,7 +147,7 @@ def history():
     """ Allows the user to view past transactions made. Including adding funds and expenses. """
     
     c.execute(""" 
-    SELECT txn_name, predicted_cost, true_cost, funds_added, notes, timestamp FROM history WHERE user_id = :user_id;
+    SELECT notes, timestamp FROM history WHERE user_id = :user_id;
     """, {"user_id": session["user_id"]})
 
     rows = c.fetchall()
@@ -155,12 +155,8 @@ def history():
 
     for row in rows:
         entries.append({
-            "name": row[0],
-            "predict": row[1],
-            "true": row[2],
-            "funds_added": row[3],
-            "notes": row[4],
-            "timestamp": row[5]
+            "notes": row[0],
+            "timestamp": row[1]
         })
 
     return render_template("history.html", entries = entries)
