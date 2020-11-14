@@ -8,10 +8,6 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Transaction Name</th>
-                <th>Predicted Cost</th>
-                <th>True Cost</th>
-                <th>Funds Added</th>
                 <th>Notes</th>
                 <th>Timestamp</th>
             </tr>
@@ -20,10 +16,6 @@
         <tbody>
             {% for i in entries %}
             <tr>
-                <td>{{ i["name"] }}</td>
-                <td>{{ i["predict"] }}</td>
-                <td>{{ i["true"] }}</td>
-                <td>{{ i["funds_added"] }}</td>
                 <td>{{ i["notes"] }}</td>
                 <td>{{ i["timestamp"] }}</td>
             </tr>
