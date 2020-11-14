@@ -69,7 +69,6 @@ def index():
     rows = c.fetchall()
 
     funds_snapshot = []
-    budget = 0
 
     for row in rows:
         funds_snapshot.append({
@@ -112,15 +111,16 @@ def expense():
         txn_name = request.form.get("txn_name")
         txn_date = request.form.get("txn_date")
         txn_p_cost = request.form.get("txn_p_cost")
+        txn_t_cost = request.form.get("txn_t_cost")
         txn_notes = request.form.get("txn_notes")
 
-        c.execute("INSERT INTO finances (user_id, txn_name, date, predicted_cost, notes) VALUES (?, ?, ?, ?, ?)",
-                (session["user_id"], txn_name, txn_date, txn_p_cost, txn_notes))
+        c.execute("INSERT INTO finances (user_id, txn_name, date, predicted_cost, true_cost, notes) VALUES (?, ?, ?, ?, ?, ?)",
+                (session["user_id"], txn_name, txn_date, txn_p_cost, txn_t_cost, txn_notes))
         conn.commit()
 
         c.execute("""
-        INSERT INTO history (user_id, txn_name, date, predicted_cost, notes) VALUES (?, ? , ?, ?, ?)
-        """, (session["user_id"], txn_name, txn_date, txn_p_cost, txn_notes))
+        INSERT INTO history (user_id, txn_name, date, predicted_cost, true_cost,notes) VALUES (?, ? , ?, ?, ?)
+        """, (session["user_id"], txn_name, txn_date, txn_p_cost, txn_t_cost, txn_notes))
         conn.commit()
             
         return redirect("/")
