@@ -109,10 +109,20 @@ def expense():
         return render_template("expense.html")
     else:
         txn_name = request.form.get("txn_name")
+        if txn_name == "":
+                txn_name = "---"
         txn_date = request.form.get("txn_date")
+        if txn_date == "":
+            txn_date = "---"
         txn_p_cost = request.form.get("txn_p_cost")
+        if txn_p_cost == "":
+            txn_p_cost = "---"
         txn_t_cost = request.form.get("txn_t_cost")
+        if txn_t_cost == "":
+            txn_t_cost = "---"
         txn_notes = request.form.get("txn_notes")
+        if txn_notes == "":
+            txn_notes == "---"
 
         c.execute("INSERT INTO finances (user_id, txn_name, date, predicted_cost, true_cost, notes) VALUES (?, ?, ?, ?, ?, ?)",
                 (session["user_id"], txn_name, txn_date, txn_p_cost, txn_t_cost, txn_notes))
@@ -131,7 +141,7 @@ def history():
     """ Allows the user to view past transactions made. Including adding funds and expenses. """
     
     c.execute(""" 
-    SELECT txn_name, predicted_cost, true_cost, funds_added, notes FROM history WHERE user_id = :user_id;
+    SELECT txn_name, predicted_cost, true_cost, funds_added, notes, timestamp FROM history WHERE user_id = :user_id;
     """, {"user_id": session["user_id"]})
 
     rows = c.fetchall()
@@ -143,21 +153,11 @@ def history():
             "predict": row[1],
             "true": row[2],
             "funds_added": row[3],
-            "notes": row[4]
+            "notes": row[4],
+            "timestamp": row[5]
         })
 
     return render_template("history.html", entries = entries)
-
-# @app.route("/delete", methods=["GET", "POST"])
-# @login_required
-# def alter():
-#     """ Allow the user to change a field in the table """
-
-#     c.execute(""" 
-#         DELETE FROM finances
-#         WHERE 
-#     """)
-
 
 @app.route("/logout")
 def logout():
