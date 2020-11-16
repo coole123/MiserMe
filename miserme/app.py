@@ -80,11 +80,12 @@ def index():
             "notes": row[5]
         })
     
-    c.execute("SELECT funds FROM registrants WHERE id = :user_id", {"user_id": session["user_id"]})
+    c.execute("SELECT funds, budget FROM registrants WHERE id = :user_id", {"user_id": session["user_id"]})
     rows = c.fetchall()
     current_funds = usd(rows[0][0])
+    budget = usd(rows[0][1])
     
-    return render_template("index.html", funds_snapshot=funds_snapshot, current_funds=current_funds)
+    return render_template("index.html", funds_snapshot=funds_snapshot, current_funds=current_funds, budget=budget)
 
 @app.route("/start_budget", methods=["GET", "POST"])
 @login_required
