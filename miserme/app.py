@@ -100,6 +100,8 @@ def start_budget():
         c.execute("UPDATE registrants SET funds = :user_budget WHERE id = :user_id", {"user_budget": user_budget, "user_id": session["user_id"]})
         c.execute("DELETE FROM finances WHERE user_id = :user_id", {"user_id": session["user_id"]})
         conn.commit()
+        c.execute("DELETE FROM history WHERE user_id = :user_id", {"user_id": session["user_id"]})
+        conn.commit()
 
         history_query = "Started the budget with %s." % user_budget
 
@@ -162,16 +164,16 @@ def expense():
         conn.commit()
 
         # Insert the new funds after subtracting an expense based on predicted or true cost
-        c.execute("SELECT funds FROM registrants WHERE user_id = :user_id;", {"user_id": session["user_id"]})
+        c.execute("SELECT funds FROM registrants WHERE id = :user_id;", {"user_id": session["user_id"]})
 
         rows = c.fetchall()
-        current_funds = usd(rows[0][0])
+        current_funds = float(rows[0][0])
         update_available_funds = 0
 
         if txn_p_cost != "---":
-            update_available_funds = current_funds - txn_p_cost
+            update_available_funds = current_funds - float(txn_p_cost)
         elif txn_t_cost != "---":
-            update_available_funds = current_funds - txn_t_cost
+            update_available_funds = current_funds - float(txn_t_cost)
 
         c.execute("UPDATE registrants SET funds = :update_available_funds WHERE id = :user_id", {"update_available_funds": update_available_funds, "user_id": session["user_id"]})
         conn.commit()
