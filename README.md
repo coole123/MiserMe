@@ -20,3 +20,4 @@ A simple, free form budgeting / financial application.
 | November 12th, 2020 | Debugged several issues that were causing values to show incorrectly (i.e. changed values to USD $, removed NONE values). |
 | November 13th, 2020 | Debugged issues regarding empty values, included true costs in expense function, and included timestamp in history. |
 | November 14th, 2020 | Restructured history function: shows detailed description as opposed to a table of entries. Altered all functions to match changes. |
+| November 15th, 2020 | Completed "start_budget" function. Corrected decrement feature to available funds when creating expenses. Layout/design changes. |
