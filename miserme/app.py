@@ -93,6 +93,16 @@ def start_budget():
     """ Have the user begin the budget by inputting starting budget, starting funds """
     if request.method == "GET":
         return render_template("start_budget.html")
+    else:
+        user_budget = request.form.get("user_budget")
+        
+        c.execute("UPDATE registrants SET budget = :user_budget WHERE id = :user_id", {"user_budget": user_budget, "user_id": session["user_id"]})
+
+        history_query = "Started the budget with %s." % user_budget
+
+        c.execute("INSERT INTO history (user_id, notes) VALUES (?, ?)", (session["user_id"], history_query))
+        conn.commit()
+        return redirect("/")
 
 @app.route("/add_funds", methods=["GET", "POST"])
 @login_required

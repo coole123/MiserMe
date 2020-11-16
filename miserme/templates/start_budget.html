@@ -5,5 +5,10 @@
 {% endblock %}
 
 {% block main %}
-    <p>Place the form to start the budget here</p>
+    <form action="/start_budget" method="POST">
+        <!-- User inputs the budget for the month -->
+        <div class="form-group">
+            <input autofocus type="number" step="0.01" name="user_budget" placeholder="How much is allocated for this month?" min=1 class="form-control">
+        </div>
+    </form>
 {% endblock %}
