@@ -86,6 +86,13 @@ def index():
     
     return render_template("index.html", funds_snapshot=funds_snapshot, current_funds=current_funds)
 
+@app.route("/start_budget", methods=["GET", "POST"])
+@login_required
+def start_budget():
+    """ Have the user begin the budget by inputting starting budget, starting funds """
+    if request.method == "GET":
+        return render_template("start_budget.html")
+
 @app.route("/add_funds", methods=["GET", "POST"])
 @login_required
 def add_funds():
