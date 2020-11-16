@@ -95,8 +95,11 @@ def start_budget():
         return render_template("start_budget.html")
     else:
         user_budget = request.form.get("user_budget")
-        
+
         c.execute("UPDATE registrants SET budget = :user_budget WHERE id = :user_id", {"user_budget": user_budget, "user_id": session["user_id"]})
+        c.execute("UPDATE registrants SET funds = :user_budget WHERE id = :user_id", {"user_budget": user_budget, "user_id": session["user_id"]})
+        c.execute("DELETE FROM finances WHERE user_id = :user_id", {"user_id": session["user_id"]})
+        conn.commit()
 
         history_query = "Started the budget with %s." % user_budget
 
@@ -156,6 +159,21 @@ def expense():
         history_query = "New Expense --> Name: %s | Date: %s | Predicted Cost: %s | True Cost: %s | Notes: %s" % (txn_name, txn_date, txn_p_cost, txn_t_cost, txn_notes)
 
         c.execute("INSERT INTO history (user_id, notes) VALUES (?, ?)", (session["user_id"], history_query))
+        conn.commit()
+
+        # Insert the new funds after subtracting an expense based on predicted or true cost
+        c.execute("SELECT funds FROM registrants WHERE user_id = :user_id;", {"user_id": session["user_id"]})
+
+        rows = c.fetchall()
+        current_funds = usd(rows[0][0])
+        update_available_funds = 0
+
+        if txn_p_cost != "---":
+            update_available_funds = current_funds - txn_p_cost
+        elif txn_t_cost != "---":
+            update_available_funds = current_funds - txn_t_cost
+
+        c.execute("UPDATE registrants SET funds = :update_available_funds WHERE id = :user_id", {"update_available_funds": update_available_funds, "user_id": session["user_id"]})
         conn.commit()
             
         return redirect("/")
