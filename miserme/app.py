@@ -214,9 +214,16 @@ def history():
 def edit():
     """ Take the current entry row and replace it with a new one """
     if request.method == "GET":
-        return render_template("edit.html")
+        
+        rows = c.execute("""
+        SELECT funds_id from finances
+        WHERE user_id = :user_id;
+        """, {"user_id": session["user_id"]})
+
+        return render_template("edit.html", entries = [ row[0] for row in rows ])
     else:
         old_entry = request.form.get("entry_id")
+        return render_template("index.html")
 
 
 @app.route("/logout")
