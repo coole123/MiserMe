@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Edit Entry
+{% endblock %}
+
+{% block main %}
+    <form action="/edit" method="POST">
+        
+        <div class="form-group">
+            <select class="form-control" name="entry_id">
+                <option disabled selected value="">Entry ID</option>
+                {% for entry in entries %} 
+                    <option value="{{ entry }}">{{ entry }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <!-- All new entries are entered here -->
+        <div class="form-group">
+            <input class="form-control" name="txn_name" type="text" placeholder="Expense Name" autofocus>
+        </div>
+
+        <div class="form-group">
+            <input class="form-control" name="txn_date" type="text" placeholder="Date">
+        </div>
+
+        <div class="form-group">
+            <input class="form-control" name="txn_p_cost" type="number" step="0.01" min=1 placeholder="Predicted Cost (if transaction has not occurred)">
+        </div>
+
+        <div class="form-group">
+            <input class="form-control" name="txn_t_cost" type="number" step="0.01" min=1 placeholder="True Cost (if transaction has occurred)">
+        </div>
+
+        <div class="form-group">
+            <input class="form-control" name="txn_notes" type="text" placeholder="Notes">
+        </div>
+
+        <button class="btn btn-primary" type="submit">Edit Entry</button>
+    </form>
+{% endblock %}
