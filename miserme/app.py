@@ -129,6 +129,9 @@ def add_funds():
 
         c.execute("INSERT INTO history (user_id, notes) VALUES (?, ?)", (session["user_id"], history_query))
         conn.commit()
+
+        c.execute("INSERT INTO finances (user_id, txn_name, date, predicted_cost, true_cost, funds_added, notes) VALUES (?, ?, ?, ?, ?, ?, ?",
+                    (session["user_id"], "---", "---", "---", "---", added_funds, special_note))
         return redirect("/")
 
 @app.route("/expense", methods=["GET", "POST"])
@@ -207,7 +210,7 @@ def edit():
     if request.method == "GET":
         return render_template("edit.html")
     else:
-        return render_template("index.html")
+        old_entry = request.form.get("entry_id")
 
 
 @app.route("/logout")
