@@ -200,6 +200,16 @@ def history():
 
     return render_template("history.html", entries = entries)
 
+@app.route("/edit", methods=["GET", "POST"])
+@login_required
+def edit():
+    """ Take the current entry row and replace it with a new one """
+    if request.method == "GET":
+        return render_template("edit.html")
+    else:
+        return render_template("index.html")
+
+
 @app.route("/logout")
 def logout():
     """ Log the current user out of the app """
