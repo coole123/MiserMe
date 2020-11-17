@@ -130,8 +130,14 @@ def add_funds():
         c.execute("INSERT INTO history (user_id, notes) VALUES (?, ?)", (session["user_id"], history_query))
         conn.commit()
 
-        c.execute("INSERT INTO finances (user_id, txn_name, date, predicted_cost, true_cost, funds_added, notes) VALUES (?, ?, ?, ?, ?, ?, ?",
-                    (session["user_id"], "---", "---", "---", "---", added_funds, special_note))
+        c.execute("""INSERT INTO finances (
+            user_id, txn_name, 
+            date, predicted_cost, 
+            true_cost, funds_added, notes) 
+            VALUES (?, ?, ?, ?, ?, ?, ?)""",
+            (session["user_id"], "---", "---", "---", "---", added_funds, special_note))
+        conn.commit()
+
         return redirect("/")
 
 @app.route("/expense", methods=["GET", "POST"])
