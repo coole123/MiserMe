@@ -252,7 +252,7 @@ def edit():
             funds_id = :funds_id
         AND
             user_id = :user_id;
-        """, {"txn_name": txn_name, "date": txn_date, "predicted_cost": txn_p_cost, "true_cost": txn_t_cost, "notes": txn_notes, "user_id": session["user_id"]})
+        """, {"txn_name": txn_name, "date": txn_date, "predicted_cost": txn_p_cost, "true_cost": txn_t_cost, "notes": txn_notes, "funds_id": old_entry, "user_id": session["user_id"]})
 
         conn.commit()
 
