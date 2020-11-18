@@ -10,8 +10,8 @@
         <p>Step 2: Input the correct information of the entry.</p>
         
         <div class="form-group">
-            <select class="form-control" name="entry_id" id="entry_id">
-                <option disabled selected value="">Entry ID</option>
+            <select id="entry_id" class="form-control" name="entry_id" required onchange="enableButton()">
+                <option selected value="">Please choose an Entry ID</option>
                 {% for entry in entries %} 
                     <option value="{{ entry }}">{{ entry }}</option>
                 {% endfor %}
@@ -43,13 +43,13 @@
         
     </form>
 
+
     <script>
-        document.querySelector("#entry_id").onkeyup = function() {
-            if (document.querySelector("#entry_id").value === "") {
-                document.querySelector("#submit").disabled = true;
-            } else {
-                document.querySelector("#submit").disabled = false;
-            }
+        function enableButton() {
+            var selectedItem = document.getElementById('entry_id');
+            var buttonElem = document.getElementById('submit');
+            buttonElem.disabled = !selectedItem.value;
         }
     </script>
+
 {% endblock %}
