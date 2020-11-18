@@ -10,6 +10,7 @@
         <!-- Table Headers -->
         <thead>
             <tr>
+                <th>Entry ID</th>
                 <th>Transaction Name</th>
                 <th>Date</th>
                 <th>Predicted Cost</th>
@@ -23,6 +24,7 @@
             <!-- Table Data -->
             {% for i in funds_snapshot %}
             <tr>
+                <td>{{ i["funds_id"] }}</td>
                 <td>{{ i["name"] }}</td>
                 <td>{{ i["date"] }}</td>
                 <td>{{ i["predict"] }}</td>

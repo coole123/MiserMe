@@ -65,19 +65,20 @@ def register():
 @login_required
 def index():
     """ Show the available monthly funds, fixed expenses, and total left """
-    c.execute("SELECT txn_name, date, predicted_cost, true_cost, funds_added, notes FROM finances WHERE user_id = :user_id", {"user_id": session["user_id"]})
+    c.execute("SELECT funds_id, txn_name, date, predicted_cost, true_cost, funds_added, notes FROM finances WHERE user_id = :user_id", {"user_id": session["user_id"]})
     rows = c.fetchall()
 
     funds_snapshot = []
 
     for row in rows:
         funds_snapshot.append({
-            "name": row[0],
-            "date": row[1],
-            "predict": usd(row[2]),
-            "true": usd(row[3]),
-            "added": usd(row[4]),
-            "notes": row[5]
+            "funds_id": row[0],
+            "name": row[1],
+            "date": row[2],
+            "predict": usd(row[3]),
+            "true": usd(row[4]),
+            "added": usd(row[5]),
+            "notes": row[6]
         })
     
     c.execute("SELECT funds, budget FROM registrants WHERE id = :user_id", {"user_id": session["user_id"]})
