@@ -22,3 +22,4 @@ A simple, free form budgeting / financial application.
 | November 14th, 2020 | Restructured history function: shows detailed description as opposed to a table of entries. Altered all functions to match changes. |
 | November 15th, 2020 | Completed "start_budget" function. Corrected decrement feature to available funds when creating expenses. Layout/design changes. |
 | November 16th, 2020 | Debugged issues in the add_funds function, created the edit function. Edit function currently only features GET method. |
+| November 17th, 2020 | Completed the edit function, added Entry ID to homepage, debugged issues after the creation of edit function. |
