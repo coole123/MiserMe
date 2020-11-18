@@ -168,7 +168,7 @@ def expense():
                 (session["user_id"], txn_name, txn_date, txn_p_cost, txn_t_cost, txn_notes))
         conn.commit()
 
-        history_query = "New Expense --> Name: %s | Date: %s | Predicted Cost: %s | True Cost: %s | Notes: %s" % (txn_name, txn_date, txn_p_cost, txn_t_cost, txn_notes)
+        history_query = "New Entry --> Name: %s | Date: %s | Predicted Cost: %s | True Cost: %s | Notes: %s" % (txn_name, txn_date, txn_p_cost, txn_t_cost, txn_notes)
 
         c.execute("INSERT INTO history (user_id, notes) VALUES (?, ?)", (session["user_id"], history_query))
         conn.commit()
@@ -224,8 +224,28 @@ def edit():
         return render_template("edit.html", entries = [ row[0] for row in rows ])
     else:
         old_entry = request.form.get("entry_id")
-        # Prevent the user from not selecting a entry to edit
 
+        # Add in the old costs to ensure accuracy when decrementing new costs
+        c.execute("""
+        SELECT predicted_cost, true_cost
+        FROM finances
+        WHERE funds_id = :funds_id
+        AND
+        user_id = :user_id;
+        """, {"funds_id": old_entry, "user_id": session["user_id"]})
+
+        rows = c.fetchall()
+        old_costs = 0
+
+        if isinstance(rows[0][0], float):
+            old_costs += rows[0][0]
+        if isinstance(rows[0][1], float):
+            old_costs += rows[0][1]
+
+        c.execute("UPDATE registrants SET funds = funds + :old_costs WHERE id = :user_id", {"old_costs": old_costs, "user_id": session["user_id"]})
+        conn.commit()
+        
+        # Prevent the user from not selecting a entry to edit
         txn_name = request.form.get("txn_name")
         if txn_name == "":
                 txn_name = "---"
@@ -257,6 +277,25 @@ def edit():
         conn.commit()
 
         # Add the change to history
+        history_query = "Changed Entry ID: %s. New entry data is (%s, %s, %s, %s, %s)." % (old_entry, txn_name, txn_date, txn_p_cost, txn_t_cost, txn_notes)
+
+        c.execute("INSERT INTO history (user_id, notes) VALUES (?, ?)", (session["user_id"], history_query))
+        conn.commit()
+
+        # Update available funds if any changes were made to cost
+        c.execute("SELECT funds FROM registrants WHERE id = :user_id;", {"user_id": session["user_id"]})
+
+        rows = c.fetchall()
+        current_funds = float(rows[0][0])
+        update_available_funds = 0
+
+        if txn_p_cost != "---":
+            update_available_funds = current_funds - float(txn_p_cost)
+        elif txn_t_cost != "---":
+            update_available_funds = current_funds - float(txn_t_cost)
+
+        c.execute("UPDATE registrants SET funds = :update_available_funds WHERE id = :user_id", {"update_available_funds": update_available_funds, "user_id": session["user_id"]})
+        conn.commit()
 
         return redirect("/")
 
