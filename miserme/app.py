@@ -224,8 +224,39 @@ def edit():
         return render_template("edit.html", entries = [ row[0] for row in rows ])
     else:
         old_entry = request.form.get("entry_id")
-        return render_template("index.html")
 
+        txn_name = request.form.get("txn_name")
+        if txn_name == "":
+                txn_name = "---"
+        txn_date = request.form.get("txn_date")
+        if txn_date == "":
+            txn_date = "---"
+        txn_p_cost = request.form.get("txn_p_cost")
+        if txn_p_cost == "":
+            txn_p_cost = "---"
+        txn_t_cost = request.form.get("txn_t_cost")
+        if txn_t_cost == "":
+            txn_t_cost = "---"
+        txn_notes = request.form.get("txn_notes")
+        if txn_notes == "":
+            txn_notes == "---"
+
+        c.execute("""
+        UPDATE finances
+        SET txn_name = :txn_name,
+            date = :date,
+            predicted_cost = :predicted_cost,
+            true_cost = :true_cost,
+            notes = :notes
+        WHERE
+            funds_id = :funds_id
+        AND
+            user_id = :user_id;
+        """, {"txn_name": txn_name, "date": txn_date, "predicted_cost": txn_p_cost, "true_cost": txn_t_cost, "notes": txn_notes, "user_id": session["user_id"]})
+
+        conn.commit()
+
+        return redirect("/")
 
 @app.route("/logout")
 def logout():
