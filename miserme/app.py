@@ -224,6 +224,7 @@ def edit():
         return render_template("edit.html", entries = [ row[0] for row in rows ])
     else:
         old_entry = request.form.get("entry_id")
+        # Prevent the user from not selecting a entry to edit
 
         txn_name = request.form.get("txn_name")
         if txn_name == "":
@@ -253,8 +254,9 @@ def edit():
         AND
             user_id = :user_id;
         """, {"txn_name": txn_name, "date": txn_date, "predicted_cost": txn_p_cost, "true_cost": txn_t_cost, "notes": txn_notes, "funds_id": old_entry, "user_id": session["user_id"]})
-
         conn.commit()
+
+        # Add the change to history
 
         return redirect("/")
 

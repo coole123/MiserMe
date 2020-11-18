@@ -10,7 +10,7 @@
         <p>Step 2: Input the correct information of the entry.</p>
         
         <div class="form-group">
-            <select class="form-control" name="entry_id">
+            <select class="form-control" name="entry_id" id="entry_id">
                 <option disabled selected value="">Entry ID</option>
                 {% for entry in entries %} 
                     <option value="{{ entry }}">{{ entry }}</option>
@@ -39,7 +39,17 @@
             <input class="form-control" name="txn_notes" type="text" placeholder="Notes">
         </div>
 
-        <button class="btn btn-primary" type="submit">Edit Entry</button>
+        <button class="btn btn-primary" type="submit" id="submit" disabled>Edit Entry</button>
         
     </form>
+
+    <script>
+        document.querySelector("#entry_id").onkeyup = function() {
+            if (document.querySelector("#entry_id").value === "") {
+                document.querySelector("#submit").disabled = true;
+            } else {
+                document.querySelector("#submit").disabled = false;
+            }
+        }
+    </script>
 {% endblock %}
