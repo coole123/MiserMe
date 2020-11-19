@@ -304,7 +304,15 @@ def edit():
 @login_required
 def edit_added():
     if request.method == "GET":
-        return render_template("edit_added.html")
+
+        # Select all entries that have a funds_added data
+        rows = c.execute("""
+        SELECT funds_id FROM finances
+        WHERE user_id = :user_id
+        AND funds_added != ---;
+        """, {"user_id": session["user_id"]})
+
+        return render_template("edit_added.html", entries=[ row[0] for row in rows ])
     else:
         return render_template("index.html")
 
