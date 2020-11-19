@@ -349,7 +349,7 @@ def edit_added():
         conn.commit()
 
         # Insert a new entry into history
-        history_query = "Changed Entry ID: %s. Funds added changed to (%s)." % (old_funds_entry, new_funds_added)
+        history_query = "Changed Entry ID: %s. Funds added changed to $%s." % (old_funds_entry, new_funds_added)
 
         c.execute("INSERT INTO history (user_id, notes) VALUES (?, ?)", (session["user_id"], history_query))
         conn.commit()
