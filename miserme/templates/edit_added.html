@@ -8,5 +8,31 @@
     <form action="/edit_added" method="POST">
         <p>Step 1: Select the entry you would like to edit by Entry ID</p>
         <p>Step 2: Input the correct information of the entry.</p>
+
+        <div class="form-group">
+            <select id="entry_id" class="form-control" name="entry_id" required onchange="enableButton()">
+                <option selected value="">Please choose an Entry ID</option>
+                {% for entry in entries %} 
+                    <option value="{{ entry }}">{{ entry }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Enter the new amount that the added funds should be for the selected entry ID -->
+        <div class="form-group">
+            <input class="form-control" name="txn_name" type="text" placeholder="Expense Name" autofocus>
+        </div>
+
+        <button class="btn btn-primary" type="submit" id="submit" disabled>Edit Added Funds</button>
+
+        <!-- Button to disable the submit button if no entry ID is selected -->
+        <script>
+            function enableButton() {
+                var selectedItem = document.getElementById('entry_id');
+                var buttonElem = document.getElementById('submit');
+                buttonElem.disabled = !selectedItem.value;
+            }
+        </script>
+
     </form>
 {% endblock %}

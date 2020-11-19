@@ -309,7 +309,7 @@ def edit_added():
         rows = c.execute("""
         SELECT funds_id FROM finances
         WHERE user_id = :user_id
-        AND funds_added != ---;
+        AND funds_added != '---';
         """, {"user_id": session["user_id"]})
 
         return render_template("edit_added.html", entries=[ row[0] for row in rows ])
