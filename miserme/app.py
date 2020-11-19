@@ -218,7 +218,8 @@ def edit():
         
         rows = c.execute("""
         SELECT funds_id from finances
-        WHERE user_id = :user_id;
+        WHERE user_id = :user_id
+        AND funds_added = '---';
         """, {"user_id": session["user_id"]})
 
         return render_template("edit.html", entries = [ row[0] for row in rows ])
