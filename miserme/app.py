@@ -299,6 +299,14 @@ def edit():
 
         return redirect("/")
 
+@app.route("/edit_added", methods=["GET", "POST"])
+@login_required
+def edit_added():
+    if request.method == "GET":
+        return render_template("edit_added.html")
+    else:
+        return render_template("index.html")
+
 @app.route("/logout")
 def logout():
     """ Log the current user out of the app """
