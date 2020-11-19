@@ -314,7 +314,48 @@ def edit_added():
 
         return render_template("edit_added.html", entries=[ row[0] for row in rows ])
     else:
-        return render_template("index.html")
+        # Firstly, subtract the original amount from available funds
+        old_funds_entry = request.form.get("entry_id")
+        
+        c.execute("""
+        SELECT funds_added FROM finances
+        WHERE funds_id = :funds_id
+        AND user_id = :user_id
+        """, {"funds_id": old_funds_entry, "user_id": session["user_id"]})
+
+        rows = c.fetchall()
+        old_funds_total = float(rows[0][0])
+
+        c.execute("UPDATE registrants SET funds = funds - :old_funds_total WHERE id = :user_id", {"old_funds_total": old_funds_total, "user_id": session["user_id"]})
+        conn.commit()
+
+        # Replace the old amount with the new amount 
+        new_funds_added = request.form.get("edited_funds")
+
+        c.execute("""
+        UPDATE finances
+        SET funds_added = :new_funds_added
+        WHERE funds_id = :funds_id
+        AND user_id = :user_id
+        """, {"new_funds_added": new_funds_added, "funds_id": old_funds_entry, "user_id": session["user_id"]})
+        conn.commit()
+
+        # Update the available funds with the new amount
+        c.execute("""
+        UPDATE registrants
+        SET funds = funds + :new_funds_added
+        WHERE id = :user_id
+        """, {"new_funds_added": new_funds_added, "user_id": session["user_id"]})
+        conn.commit()
+
+        # Insert a new entry into history
+        history_query = "Changed Entry ID: %s. Funds added changed to (%s)." % (old_funds_entry, new_funds_added)
+
+        c.execute("INSERT INTO history (user_id, notes) VALUES (?, ?)", (session["user_id"], history_query))
+        conn.commit()
+
+        return redirect("/")
+
 
 @app.route("/logout")
 def logout():
