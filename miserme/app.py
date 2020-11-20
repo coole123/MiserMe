@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request, session
+from flask import Flask, render_template, redirect, request, session, Response
 from flask_session import Session 
 import sqlite3
 from helpers import login_required, usd
@@ -360,14 +360,18 @@ def edit_added():
 @login_required
 def download():
     """ Allow the user to download a copy of the current expenses listed on the homepage """
-    
-    c.execute("""
-    SELECT user_id FROM finances
-    WHERE user_id = :user_id;
-    """, {"user_id": session["user_id"]})
 
-    rows = c.fetchall()
-    current_user = rows[0][0]
+    # c.execute(".headers on")
+    # c.execute(".mode csv")
+    # c.execute(".output miserme.csv")
+    # c.execute("SELECT * FROM finances WHERE user_id = :user_id", {"user_id": session["user_id"]})
+    # c.execute(".quit")
+
+    c.execute("SELECT * FROM finances WHERE user_id = :user_id", {"user_id": session["user_id"]})
+    download_file = c.fetchall()
+
+    return Response(download_file, mimetype="text/csv")
+
 
 @app.route("/logout")
 def logout():
