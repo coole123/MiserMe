@@ -395,7 +395,6 @@ def download():
     response.headers.set("Content-Disposition", "attachment", filename="miserme.csv")
     return response
 
-
 @app.route("/logout")
 def logout():
     """ Log the current user out of the app """
