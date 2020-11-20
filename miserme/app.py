@@ -1,8 +1,11 @@
-from flask import Flask, render_template, redirect, request, session, Response
+from flask import Flask, render_template, redirect, request, session
 from flask_session import Session 
 import sqlite3
 from helpers import login_required, usd
 from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.wrappers import Response
+from io import StringIO
+import csv
 
 app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = False
@@ -360,17 +363,37 @@ def edit_added():
 @login_required
 def download():
     """ Allow the user to download a copy of the current expenses listed on the homepage """
+    c.execute("SELECT funds_id, txn_name, date, predicted_cost, true_cost, funds_added, notes FROM finances WHERE user_id = :user_id", {"user_id": session["user_id"]})
+    rows = c.fetchall()
 
-    # c.execute(".headers on")
-    # c.execute(".mode csv")
-    # c.execute(".output miserme.csv")
-    # c.execute("SELECT * FROM finances WHERE user_id = :user_id", {"user_id": session["user_id"]})
-    # c.execute(".quit")
+    def reformat():
+        data = StringIO()
+        w = csv.writer(data)
 
-    c.execute("SELECT * FROM finances WHERE user_id = :user_id", {"user_id": session["user_id"]})
-    download_file = c.fetchall()
+        # write header
+        w.writerow(("Entry ID", "Transaction Name", "Date", "Predicted Cost", "True Cost", "Funds Added", "Notes"))
+        yield data.getvalue()
+        data.seek(0)
+        data.truncate(0)
 
-    return Response(download_file, mimetype="text/csv")
+        # write each item
+        for item in rows:
+            w.writerow((
+                item[0],
+                item[1],
+                item[2],
+                item[3],
+                item[4],
+                item[5],
+                item[6]
+            ))
+            yield data.getvalue()
+            data.seek(0)
+            data.truncate(0)
+    
+    response = Response(reformat(), mimetype='text/csv')
+    response.headers.set("Content-Disposition", "attachment", filename="miserme.csv")
+    return response
 
 
 @app.route("/logout")
