@@ -356,6 +356,18 @@ def edit_added():
 
         return redirect("/")
 
+@app.route("/download")
+@login_required
+def download():
+    """ Allow the user to download a copy of the current expenses listed on the homepage """
+    
+    c.execute("""
+    SELECT user_id FROM finances
+    WHERE user_id = :user_id;
+    """, {"user_id": session["user_id"]})
+
+    rows = c.fetchall()
+    current_user = rows[0][0]
 
 @app.route("/logout")
 def logout():
