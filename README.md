@@ -5,6 +5,10 @@ MiserMe is an application that can help users log, budget, and record their fina
 
 <hr>
 
+<br>
+<br>
+<br>
+
 <h2 align="center">Preview: Login and Register</h2>
 <p>Unregistered users will have to create an account before proceeding to use the application.</p>
 
@@ -19,6 +23,10 @@ MiserMe is an application that can help users log, budget, and record their fina
 </div>
 
 <hr>
+
+<br>
+<br>
+<br>
 
 ### Updates
 
