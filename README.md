@@ -211,3 +211,4 @@ MiserMe is an application that can help users log, budget, and record their fina
 | November 17th, 2020 | Completed the edit function, added Entry ID to homepage, debugged issues after the creation of edit function. |
 | November 18th, 2020 | Completed the edit_add function and the edit_added.html file. User is now able to edit funds that they added to account. |
 | November 19th, 2020 | Completed the download function. Tested entire application. Application complete. Now starting restyling for aesthetics. |
+| November 20th, 2020 | MiserMe completed. |
