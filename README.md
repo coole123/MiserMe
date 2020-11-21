@@ -154,7 +154,40 @@ MiserMe is an application that can help users log, budget, and record their fina
 <img src="images/edit_add_funds_homepage.png">
 </div>
 
-### Updates
+<hr>
+
+<br>
+<br>
+<br>
+
+<h2 align="center">Preview: History</h2>
+<p>One of the best features of this app is that it provides a snapshot of every change created in the budget. Dont remember where that $200 came from? No worries! Grandma gave it to you ~~~ and she might give you more next month ~~~</p>
+
+<div align="center">
+<img src="images/history.png">
+</div>
+
+<hr>
+
+<br>
+<br>
+<br>
+
+<h2 align="center">Preview: Download</h2>
+<p>Another excellent feature of this app is the ability to export all transactions made into a csv file for users that like to keep a record of their budget and stay on top of their finances.</p>
+
+<div align="center">
+<img src="images/downloads.png">
+</div>
+
+<br>
+<br>
+<br>
+
+<hr>
+
+
+### Logs: the creation of MiserMe
 
 | Date | Major Updates |
 | ------------- | ------------- |
