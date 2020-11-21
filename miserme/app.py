@@ -129,7 +129,7 @@ def add_funds():
         rows = c.fetchall()
         new_funds = usd(rows[0][0])
 
-        history_query = "Added $%s to available funds. New total = $%s || %s" % (added_funds, new_funds, special_note)
+        history_query = "Added $%s to available funds. New total = %s || %s" % (added_funds, new_funds, special_note)
 
         c.execute("INSERT INTO history (user_id, notes) VALUES (?, ?)", (session["user_id"], history_query))
         conn.commit()
