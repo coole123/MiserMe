@@ -107,7 +107,7 @@ def start_budget():
         c.execute("DELETE FROM history WHERE user_id = :user_id", {"user_id": session["user_id"]})
         conn.commit()
 
-        history_query = "Started the budget with %s." % user_budget
+        history_query = "Started the budget with $%s." % user_budget
 
         c.execute("INSERT INTO history (user_id, notes) VALUES (?, ?)", (session["user_id"], history_query))
         conn.commit()
@@ -129,7 +129,7 @@ def add_funds():
         rows = c.fetchall()
         new_funds = usd(rows[0][0])
 
-        history_query = "Added %s to available funds. New total = %s. Note: %s" % (added_funds, new_funds, special_note)
+        history_query = "Added $%s to available funds. New total = $%s || %s" % (added_funds, new_funds, special_note)
 
         c.execute("INSERT INTO history (user_id, notes) VALUES (?, ?)", (session["user_id"], history_query))
         conn.commit()
@@ -171,7 +171,7 @@ def expense():
                 (session["user_id"], txn_name, txn_date, txn_p_cost, txn_t_cost, txn_notes))
         conn.commit()
 
-        history_query = "New Entry --> Name: %s | Date: %s | Predicted Cost: %s | True Cost: %s | Notes: %s" % (txn_name, txn_date, txn_p_cost, txn_t_cost, txn_notes)
+        history_query = "New Expense: %s || %s || Predicted: %s || True: %s ||  %s" % (txn_name, txn_date, txn_p_cost, txn_t_cost, txn_notes)
 
         c.execute("INSERT INTO history (user_id, notes) VALUES (?, ?)", (session["user_id"], history_query))
         conn.commit()
@@ -281,7 +281,7 @@ def edit():
         conn.commit()
 
         # Add the change to history
-        history_query = "Changed Entry ID: %s. New entry data is (%s, %s, %s, %s, %s)." % (old_entry, txn_name, txn_date, txn_p_cost, txn_t_cost, txn_notes)
+        history_query = "Changed Entry ID: %s. New data: %s || %s || Predicted: %s || True: %s || %s." % (old_entry, txn_name, txn_date, txn_p_cost, txn_t_cost, txn_notes)
 
         c.execute("INSERT INTO history (user_id, notes) VALUES (?, ?)", (session["user_id"], history_query))
         conn.commit()
