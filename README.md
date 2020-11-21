@@ -63,6 +63,97 @@ MiserMe is an application that can help users log, budget, and record their fina
 
 ### Please note: Predicted cost is used for transactions that have not yet occurred. True cost is used for transactions that have already taken place.
 
+<hr>
+
+<br>
+<br>
+<br>
+
+<h2 align="center">Preview: Homepage after adding an Expense</h2>
+<p>This is the homepage after the user adds an expense. As you can see, "Rent" was recorded.</p>
+
+<div align="center">
+<img src="images/expense_homepage.png">
+</div>
+
+<hr>
+
+<br>
+<br>
+<br>
+
+<h2 align="center">Preview: Edit Expense</h2>
+<p>Assuming the user made an error, or if the transaction date had past and the user wants to change a "Predicted Cost" into a "True Cost", the user may edit transactions via the "Edit Expense" button in the navigation bar.</p>
+
+<div align="center">
+<img src="images/edit_expense.png">
+</div>
+
+<hr>
+
+<br>
+<br>
+<br>
+
+<h2 align="center">Preview: Homepage after editing an Expense</h2>
+<p>Below is the homepage after the user had edited the transaction "Rent" to a True Cost $500 less than what he had anticipated.</p>
+
+<div align="center">
+<img src="images/edit_expense_homepage.png">
+</div>
+
+<hr>
+
+<br>
+<br>
+<br>
+
+<h2 align="center">Preview: Add Funds</h2>
+<p>The user can add funds to their available pool whenever fortune strikes. Here is an example of a user receiving $100 from his grandmother.</p>
+
+<div align="center">
+<img src="images/add_funds.png">
+</div>
+
+<hr>
+
+<br>
+<br>
+<br>
+
+<h2 align="center">Preview: Homepage after adding Funds</h2>
+<p>The added funds appears as another transaction. However, rather than decrementing the available funds, the new funds are added.</p>
+
+<div align="center">
+<img src="images/add_funds_homepage.png">
+</div>
+
+<hr>
+
+<br>
+<br>
+<br>
+
+<h2 align="center">Preview: Edit Added Funds</h2>
+<p>Perhaps the user made an error when adding in funds? Easily corrected using the "Edit Added Funds" feature. Here is an example of the user's grandmother giving an extra $100.</p>
+
+<div align="center">
+<img src="images/edit_add_funds.png">
+</div>
+
+<hr>
+
+<br>
+<br>
+<br>
+
+<h2 align="center">Preview: Homepage after editing added Funds</h2>
+<p>The homepage is updated with the extra $100 the user received from his grandmother.</p>
+
+<div align="center">
+<img src="images/edit_add_funds_homepage.png">
+</div>
+
 ### Updates
 
 | Date | Major Updates |
