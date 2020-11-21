@@ -3,6 +3,13 @@ A simple, free form budgeting / financial Flask application built using Python, 
 
 MiserMe is an application that can help users log, budget, and record their finances. I usually do my finances using Microsoft Excel, but grew tired of continually creating, styling, and manually editing each cell. I created MiserMe to help accelerate my financial recordings, and create files for my records on the fly. The biggest strength in MiserMe is it's ability to record every tiny change made to your budget, including that unexpected $3 bill you found as you were walking home from class.
 
+### Preview: Login and Register
+Unregistered user will have to create an account before proceeding to use the application.
+
+<div align="center">
+<img src="images/login.png">
+</div>
+
 ### Updates
 
 | Date | Major Updates |
