@@ -28,6 +28,41 @@ MiserMe is an application that can help users log, budget, and record their fina
 <br>
 <br>
 
+<h2 align="center">Preview: Homepage</h2>
+<p>Once logged in, users will be taken to a semi-blank page, signifying the user to start a budget.</p>
+
+<div align="center">
+<img src="images/homepage.png">
+</div>
+
+<hr>
+
+<br>
+<br>
+<br>
+
+<h2 align="center">Preview: Start Budget</h2>
+<p>The user can start a budget by clicking the "Start Budget" option in the navigation bar. They will be prompted to enter a value (budget) that they want to allocate for this period.</p>
+
+<div align="center">
+<img src="images/start_budget.png">
+</div>
+
+<hr>
+
+<br>
+<br>
+<br>
+
+<h2 align="center">Preview: Add Expense</h2>
+<p>After a budget is started, users have an option to add an expense (i.e. bills, transactions, etc.). Below is an example of a user entering his rent.</p>
+
+<div align="center">
+<img src="images/expense.png">
+</div>
+
+### Please note: Predicted cost is used for transactions that have not yet occurred. True cost is used for transactions that have already taken place.
+
 ### Updates
 
 | Date | Major Updates |
