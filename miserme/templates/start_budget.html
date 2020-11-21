@@ -6,7 +6,8 @@
 
 {% block main %}
     <form action="/start_budget" method="POST">
-        <p>Caution: Starting a new budget will clear your current monthly log and all history!</p>
+        <p><u>CAUTION</u>: Starting a new budget will clear your current log and history!</p>
+        <p><u>RECOMMENDED</u>: Download the current log for your records.</p>
         <!-- User inputs the budget for the month -->
         <div class="form-group">
             <input autofocus type="number" step="0.01" name="user_budget" placeholder="How much is allocated for this month?" min=1 class="form-control">
